@@ -14,6 +14,18 @@ const ONE_PIECE = [
   ['Robin', '/characters/robin.jpg'], ['Franky', '/characters/franky.jpg'],
   ['Brook', '/characters/brook.png'], ['Jinbe', '/characters/jinbe.jpg']
 ];
+const JUJUTSU_KAISEN = [
+  ['Satoru Gojo', '/characters/gojo.jpg'],
+  ['Yuji Itadori', '/characters/yuji.jpg'],
+  ['Megumi Fushiguro', '/characters/megumi.jpg'],
+  ['Nobara Kugisaki', '/characters/nobara.jpg'],
+  ['Kento Nanami', '/characters/nanami.jpg'],
+  ['Maki Zenin', '/characters/maki.jpg'],
+  ['Panda', '/characters/panda.jpg'],
+  ['Aoi Todo', '/characters/todo.jpg'],
+  ['Toji Fushiguro', '/characters/toji.jpg'],
+  ['Ryomen Sukuna', '/characters/sukuna.jpg']
+];
 
 function makeId() {
   return (crypto.randomUUID?.() || Math.random().toString(36).slice(2) + Date.now().toString(36)).replaceAll('-', '').slice(0, 16);
@@ -45,7 +57,10 @@ export default function App() {
   const [submitted, setSubmitted] = useState(false);
   const resultRef = useRef(null);
 
-  const characters = useMemo(() => ONE_PIECE, []);
+  const characters = useMemo(
+  () => theme === 'jujutsu_kaisen' ? JUJUTSU_KAISEN : ONE_PIECE,
+  [theme]
+);
   const isConfigured = Boolean(supabase);
   const shareUrl = gameId ? `${location.origin}/game/${gameId}` : '';
 
