@@ -187,8 +187,17 @@ export default function App() {
       <h4>Choose your anime world</h4>
       <div className="themes">
         <button type="button" className={`theme-card ${theme==='one_piece'?'selected':''}`} onClick={()=>setTheme('one_piece')}><span className="theme-icon">🏴‍☠️</span><b>ONE PIECE</b><small>Available now</small></button>
-        <button type="button" className="theme-card locked" onClick={()=>setNotice('Jujutsu Kaisen will be added when its character images are provided.')}><span className="theme-icon">👊</span><b>JUJUTSU KAISEN</b><small>Coming soon</small></button>
-      </div>
+        <button
+  type="button"
+  className={`theme-card ${theme === 'jujutsu_kaisen' ? 'selected' : ''}`}
+  onClick={() => setTheme('jujutsu_kaisen')}
+>
+  <span className="theme-icon">👊</span>
+  <b>JUJUTSU KAISEN</b>
+  <small>
+    {theme === 'jujutsu_kaisen' ? 'Selected ✓' : 'Choose this world'}
+  </small>
+</button>
       <h3>02 / Upload 10 friends</h3>
       <p className="subtle">Choose one photo per friend. These photos are shared with anyone who has your game link.</p>
       <div className="upload-grid">{friends.map((f,i)=><div className="upload-card" key={i}>
@@ -202,8 +211,13 @@ export default function App() {
     <footer>BUILT FOR FRIENDS · KEEP IT KIND · NO SCORES</footer>
   </main>;
 
-  if (page === 'play') return <main className="shell">
-    <header className="top"><div className="brand-mark">☠</div><div><div className="eyebrow">ONE PIECE EDITION</div><h1>Match the <span>crew</span></h1></div></header>
+  if (page === 'play') return <main className="shell"><div className="eyebrow">
+  {theme === 'jujutsu_kaisen'
+    ? 'JUJUTSU KAISEN EDITION'
+    : 'ONE PIECE EDITION'}
+</div>
+
+<h1>Match your <span>world</span></h1></div></header>
     <section className="panel"><p className="subtle">Created by {game?.owner_name || 'your friend'}. Match every friend to the character that fits them best.</p>
       <label className="field-label">Your name or nickname<input value={participant} onChange={e=>setParticipant(e.target.value)} placeholder="Who is making these matches?" maxLength="40"/></label>
       <div className="match-list">{characters.map(([char,img],i)=><div className="match-row" key={char}>
