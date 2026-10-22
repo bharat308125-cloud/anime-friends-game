@@ -152,13 +152,24 @@ export default function App() {
     }
   }
 
-  async function shareLink() {
-    try {
-      if (navigator.share) await navigator.share({title:'Anime Friends Matcher', text:'Match our friends with One Piece characters!', url:shareUrl});
-      else { await navigator.clipboard.writeText(shareUrl); setNotice('Game link copied. Paste it into WhatsApp.'); }
-    } catch {}
+async function shareLink() {
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: 'CharaMatch',
+        text: `Match our friends with ${
+          theme === 'jujutsu_kaisen' ? 'Jujutsu Kaisen' : 'One Piece'
+        } characters!`,
+        url: shareUrl
+      });
+    } else {
+      await navigator.clipboard.writeText(shareUrl);
+      setNotice('Game link copied. Paste it into WhatsApp.');
+    }
+  } catch (error) {
+    console.log('Sharing cancelled or unavailable.');
   }
-
+}
   async function renderFriend(f, index) {
     const { data } = supabase.storage.from('friend-photos').getPublicUrl(f.path);
     return {...f, index, url:data.publicUrl};
