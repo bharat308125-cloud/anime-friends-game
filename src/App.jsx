@@ -190,7 +190,15 @@ async function shareLink() {
   const activeFriends = resolvedFriends.length ? resolvedFriends : friends.map((f,index)=>({...f,index,url:f.preview}));
 
   if (page === 'home') return <main className="shell">
-    <header className="top"><div className="brand-mark">☠</div><div><div className="eyebrow">THE CREW MATCHING GAME</div><h1>Anime Friends <span>Matcher</span></h1></div></header>
+    <header className="top">
+  <div className="brand-mark">☠</div>
+  <div>
+    <div className="eyebrow">
+      {theme === 'jujutsu_kaisen' ? 'JUJUTSU KAISEN EDITION' : 'ONE PIECE EDITION'}
+    </div>
+    <h1>Match your <span>crew</span></h1>
+  </div>
+</header>
     <section className="hero"><div className="hero-copy"><p className="eyebrow">PICK YOUR UNIVERSE</p><h2>Which anime character<br/>is your friend?</h2><p>Upload your crew once, share a game link, and see who your friends match with.</p></div><div className="hero-stamp">WANTED<br/><strong>YOUR<br/>CREW</strong><small>FUN ONLY • NO SCORES</small></div></section>
     <form className="panel" onSubmit={createGame}>
       <h3>01 / Create your game</h3>
