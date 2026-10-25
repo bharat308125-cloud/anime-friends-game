@@ -1,5 +1,6 @@
 {
-  "rewrites": [
-    { "source": "/game/:id", "destination": "/" }
-  ]
+"rewrites": [
+{ "source": "/game/:id", "destination": "/" },
+{ "source": "/result/:token", "destination": "/" }
+]
 }
